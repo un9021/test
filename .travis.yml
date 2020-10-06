@@ -1,2 +1,10 @@
 language: cpp
 compiler: gcc
+script:
+    - cmake .
+    - make
+    - make package
+deploy:
+  skip_cleanup: true
+  script:
+  - curl -f -T test_prog-0.0.1-Linux.deb -ushebdim:$BINTRAY_API_KEY "http://api.bintray.com/content/un9021/test/test/test_prog-0.0.1-Linux.deb;deb_distribution=xenial;deb_component=main;deb_architecture=i586;publish=1"
